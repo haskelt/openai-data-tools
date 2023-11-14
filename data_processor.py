@@ -45,8 +45,7 @@ class DataProcessor:
             time.sleep(.2)
             response = {'choices': [{'message': {'content': item}}], 'usage': {}}
 
-        # ADD SOME CODE HERE TO CHECK FOR EXCEEDING THE TOKEN LIMIT
-        return response['choices'][0]['message']['content']
+        return response
 
     # Initializes a data structure for storing data for each item
     def _init_item_data(self, n_items):
@@ -58,7 +57,7 @@ class DataProcessor:
 
     # Returns a list with the model output for each item based on the last call to <process>
     def _get_output(self):
-        return self._data['item_data']
+        return [item['choices'][0]['message']['content'] for item in self._data['item_data']]
     
     # Asks the model to go through each item in the list <items>, apply the processing
     # specified in the instructions, and return the result.  <mode> can be 'live' or
