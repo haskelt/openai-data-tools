@@ -1,42 +1,12 @@
 # standard packages
-import json
 import statistics
 import time
 import random
 # non-standard packages, i.e., you might need to install them
 import numpy as np
-import openai
+import openai_functions as ai
 
-class OpenAIDataProcessor:
-
-#### ALL CODE THAT INTERACTS WITH THE OPENAI API SHOULD GO IN THE SECTION BELOW
-
-    # Configure properties that will apply to all OpenAI requests
-    @staticmethod
-    def _configure_openai(api_key, timeout):
-        openai.api_key = api_key
-        openai.timeout = timeout
-    
-    # Send a request to the specified <model> containing <messages>, and return the
-    # response. If there is a timeout error or a communication error, will keep
-    # retrying until there is a successful response.
-    @staticmethod
-    def _make_openai_request(model, messages):
-        # If the request to OpenAI times out, this will keep making the same request
-        # until it doesn't time out. If the timeout value is unreasonably low, this 
-        # can lead to an infinite loop.
-        while True:
-            try:
-                raw_response = openai.chat.completions.create(model=model, messages=messages)
-                response = json.loads(raw_response.model_dump_json())
-                break
-            except openai.APITimeoutError as e:
-                print('Request timed out, retrying...')
-            except openai.APIConnectionError as e:
-                print('Error communicating with OpenAI, retrying...')
-        return response
-
-#### ALL CODE THAT INTERACTS WITH THE OPENAID API SHOULD GO IN THE SECTION ABOVE
+class DataProcessor:
     
     def __init__(self, model, instructions, examples=None, api_key=None, timeout=30):
         self._data = {}
@@ -62,7 +32,7 @@ class OpenAIDataProcessor:
     # This function is used internally to process a single item
     def _process_item(self, item):
         if self.mode == 'live':
-            response = self._make_openai_request(
+            response = ai.make_request(
                 self.model, 
                 messages = self.instruction_messages 
                    + self.example_messages 
@@ -87,7 +57,7 @@ class OpenAIDataProcessor:
     # Also creates an attribute on the processor's _data object:
     # <output> - A list containing the responses from the model for each item
     def process(self, items, mode='live'):
-        self._configure_openai(api_key=self.api_key, timeout=self.timeout)
+        ai.configure(api_key=self.api_key, timeout=self.timeout)
         self.mode = mode
         n_items = len(items)
         self._data['output'] = []
