@@ -8,7 +8,9 @@ import random
 import numpy as np
 import openai
 
-class GPTDataCoder:
+from openai_data_object import OpenAIDataObject
+
+class OpenAIDataCoder (OpenAIDataObject):
     
     def __init__(self, api_key, model, instructions, examples=None):
         self._data = {}
@@ -231,15 +233,3 @@ class GPTDataCoder:
             }  
         else:
             raise ValueException('Scoring type must be either categorical or probability')
-    
-    # Saves the _data attribute of the coder object to <filename>. Most importantly, this
-    # includes the results from the last call to <code>, so you can capture this information
-    # and restore it in another session.
-    def dump(self, filename):
-        with open(filename, "wb") as outfile:
-            pickle.dump(self._data, outfile)
-
-    # Restores the _data attribute of the coder object that was previously dumped to <filename>
-    def restore(self, filename):
-        with open(filename, "rb") as infile:
-            self._data = pickle.load(infile)
