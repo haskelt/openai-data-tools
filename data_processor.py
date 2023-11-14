@@ -47,7 +47,19 @@ class DataProcessor:
 
         # ADD SOME CODE HERE TO CHECK FOR EXCEEDING THE TOKEN LIMIT
         return response['choices'][0]['message']['content']
-        
+
+    # Initializes a data structure for storing data for each item
+    def _init_item_data(self, n_items):
+        self._data['item_data'] = [None] * n_items
+    
+    # Takes <response> and stores it as part of the item data for item <i>
+    def _store_item_data(self, i, response):
+        self._data['item_data'][i] = response
+
+    # Returns a list with the model output for each item based on the last call to <process>
+    def _get_output(self):
+        return self._data['item_data']
+    
     # Asks the model to go through each item in the list <items>, apply the processing
     # specified in the instructions, and return the result.  <mode> can be 'live' or
     # 'simulated', and controls whether we send requests to OpenAI and get a real
@@ -60,12 +72,13 @@ class DataProcessor:
         ai.configure(api_key=self.api_key, timeout=self.timeout)
         self.mode = mode
         n_items = len(items)
-        self._data['output'] = []
+        self._init_item_data(n_items)
         for i, item in enumerate(items):
-            self._data['output'].append(self._process_item(item))
+            response = self._process_item(item)
+            self._store_item_data(i, response)
             print('Progress: {:.0%}'.format((i+1)/n_items), end='\r')
         print('')
-        return self._data['output']
+        return self._get_output()
     
     # Using the results from the last call to <process>, compares the model responses
     # to the values in <targets>, and returns a list with the outcome of that 
@@ -78,7 +91,7 @@ class DataProcessor:
     # the values are 0 or 1 to indicate whether the model response matched the target 
     # for that item and that run.
     def score(self, targets):
-        return (np.array(self._data['output']) == np.array(targets)).astype(dtype=int)
+        return (np.array(self._get_output()) == np.array(targets)).astype(dtype=int)
 
     # Saves the _data attribute of the object to <filename>, so you can restore the
     # state of the object in another session.
