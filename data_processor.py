@@ -29,7 +29,19 @@ class DataProcessor:
                 self.example_messages.append({'role': 'user', 'content': example['item']})
                 self.example_messages.append({'role': 'assistant', 'content': example['target']})
     
-    # This function is used internally to process a single item
+    # Initializes a data structure for storing data for each item
+    def _init_item_data(self, n_items):
+        self._data['item_data'] = [None] * n_items
+    
+    # Takes <response> and stores it as part of the item data for item <i>
+    def _store_item_data(self, i, response):
+        self._data['item_data'][i] = response
+
+    # Returns a list with the model output for each item based on the last call to <process>
+    def _get_output(self):
+        return [item['choices'][0]['message']['content'] for item in self._data['item_data']]
+
+    # Processes a single item
     def _process_item(self, item):
         if self.mode == 'live':
             response = ai.make_request(
@@ -46,18 +58,15 @@ class DataProcessor:
             response = {'choices': [{'message': {'content': item}}], 'usage': {}}
 
         return response
-
-    # Initializes a data structure for storing data for each item
-    def _init_item_data(self, n_items):
-        self._data['item_data'] = [None] * n_items
     
-    # Takes <response> and stores it as part of the item data for item <i>
-    def _store_item_data(self, i, response):
-        self._data['item_data'][i] = response
-
-    # Returns a list with the model output for each item based on the last call to <process>
-    def _get_output(self):
-        return [item['choices'][0]['message']['content'] for item in self._data['item_data']]
+    # Processes each of the items in <items>
+    def _process_items(self, items):
+        n_items = len(items)
+        for i, item in enumerate(items):
+            response = self._process_item(item)
+            self._store_item_data(i, response)
+            print('Progress: {:.0%}'.format((i+1)/n_items), end='\r')
+        print('')
     
     # Asks the model to go through each item in the list <items>, apply the processing
     # specified in the instructions, and return the result.  <mode> can be 'live' or
@@ -66,17 +75,12 @@ class DataProcessor:
     # purposes).
     # 
     # Also creates an attribute on the processor's _data object:
-    # <output> - A list containing the responses from the model for each item
+    # <item_data> - A list containing the responses from the model for each item
     def process(self, items, mode='live'):
         ai.configure(api_key=self.api_key, timeout=self.timeout)
         self.mode = mode
-        n_items = len(items)
-        self._init_item_data(n_items)
-        for i, item in enumerate(items):
-            response = self._process_item(item)
-            self._store_item_data(i, response)
-            print('Progress: {:.0%}'.format((i+1)/n_items), end='\r')
-        print('')
+        self._init_item_data(len(items))
+        self._process_items(items)
         return self._get_output()
     
     # Using the results from the last call to <process>, compares the model responses
