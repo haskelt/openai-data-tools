@@ -15,9 +15,15 @@ class DataProcessor:
         # <timeout> controls how long we wait (in seconds) for a  response from OpenAI
         # before giving up and trying again.
         self.timeout = timeout
+        self._configure_instructions(instructions)
+        self._configure_examples(examples)
+
+    def _configure_instructions(self, instructions):
         self.instruction_messages=[
             {"role": "system", "content": instructions }
         ]
+
+    def _configure_examples(self, examples):
         # Configure example item/response pairs to be used for few-shot learning. They 
         # will be provided to the model after the instructions and before the item to be 
         # classified.
@@ -29,17 +35,17 @@ class DataProcessor:
                 self.example_messages.append({'role': 'user', 'content': example['item']})
                 self.example_messages.append({'role': 'assistant', 'content': example['target']})
     
-    # Initializes a data structure for storing data for each item
-    def _init_item_data(self, n_items):
-        self._data['item_data'] = [None] * n_items
+    # Initializes a data structure for storing output data for each item
+    def _init_output(self, n_items):
+        self._data['output'] = [None] * n_items
     
-    # Takes <response> and stores it as part of the item data for item <i>
-    def _store_item_data(self, i, response):
-        self._data['item_data'][i] = response
+    # Takes <response> and stores it as part of the output data for item <i>
+    def _store_output(self, i, response):
+        self._data['output'][i] = item['choices'][0]['message']['content']
 
     # Returns a list with the model output for each item based on the last call to <process>
     def _get_output(self):
-        return [item['choices'][0]['message']['content'] for item in self._data['item_data']]
+        return self._data['output']
 
     # Processes a single item
     def _process_item(self, item):
@@ -51,8 +57,8 @@ class DataProcessor:
                    + [{'role': 'user', 'content': item}] 
             )
         # This provides a way to test that your script runs properly without actually
-        # making a call to the OpenAI API. It provides a random response along with a
-        # small delay.
+        # making a call to the OpenAI API. It returns the original item without changes
+        # as output. To be more realistic, it also generates a small delay.
         elif self.mode == 'simulated':
             time.sleep(.2)
             response = {'choices': [{'message': {'content': item}}], 'usage': {}}
@@ -64,7 +70,7 @@ class DataProcessor:
         n_items = len(items)
         for i, item in enumerate(items):
             response = self._process_item(item)
-            self._store_item_data(i, response)
+            self._store_output(i, response)
             print('Progress: {:.0%}'.format((i+1)/n_items), end='\r')
         print('')
     
@@ -79,7 +85,7 @@ class DataProcessor:
     def process(self, items, mode='live'):
         ai.configure(api_key=self.api_key, timeout=self.timeout)
         self.mode = mode
-        self._init_item_data(len(items))
+        self._init_output(len(items))
         self._process_items(items)
         return self._get_output()
     
