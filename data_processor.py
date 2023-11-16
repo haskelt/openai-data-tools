@@ -83,19 +83,6 @@ class DataProcessor:
         self._process_items(items)
         return self._get_output()
     
-    # Using the results from the last call to <process>, compares the model responses
-    # to the values in <targets>, and returns a list with the outcome of that 
-    # comparison. <targets> should be the same length that <items> was in the last 
-    # call to <process>. 
-    #
-    # ISN'T ACTUALLY DOING THIS PART CURRENTLY
-    # Also creates an attribute on the coder's _data object called <scoring_matrix>. 
-    # This is an array with rows for each item, and columns for each run, and where 
-    # the values are 0 or 1 to indicate whether the model response matched the target 
-    # for that item and that run.
-    def score(self, targets):
-        return (np.array(self._get_output()) == np.array(targets)).astype(dtype=int)
-
     # Saves the _data attribute of the object to <filename>, so you can restore the
     # state of the object in another session.
     def dump(self, filename):
