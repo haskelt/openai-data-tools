@@ -4,7 +4,7 @@ import time
 import random
 # non-standard packages, i.e., you might need to install them
 import numpy as np
-import openai_functions as ai
+from . import openai_functions as ai
 
 class DataProcessor:
     
@@ -41,7 +41,7 @@ class DataProcessor:
     
     # Takes <response> and stores it as part of the output data for item <i>
     def _store_output(self, i, response):
-        self._data['output'][i] = item['choices'][0]['message']['content']
+        self._data['output'][i] = response['choices'][0]['message']['content']
 
     # Returns a list with the model output for each item based on the last call to <process>
     def _get_output(self):
