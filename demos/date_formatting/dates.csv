@@ -1,0 +1,14 @@
+item,target,notes
+4-19-2008,2008-04-19,
+8/17/2019,2019-08-17,
+1.28.56,1956-01-28,Has to infer that we mean 1956 and not 2056
+10.23.22,2022-10-23,Has to infer that we mean 2022 and not 1922
+February 14th 2010,2010-02-14,
+"Dec 12, 1995",1995-12-12,
+23 March 1974,1974-03-23,
+7/9/80,1980-07-09,Ambiguous: Should this date be interpreted with US MM/DD/YY convention or European DD/MM/YY convention?
+14/19/93,NA,This is not a valid date for either convention
+2/15,NA,This is an invalid date because no year is specified
+"13th of April, 2016",2016-04-13
+"Twenty-fifth of August, 1955",1955-08-25
+"October twelfth, nineteen eighty-six",1986-10-12
