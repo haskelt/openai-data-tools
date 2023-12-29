@@ -1,13 +1,12 @@
 # standard packages
 import json
 import statistics
-import pickle
 import time
 import random
 # non-standard packages, i.e., you might need to install them
 import numpy as np
 
-from data_processor import DataProcessor
+from .data_processor import DataProcessor
 
 class DataCoder (DataProcessor):
 
@@ -37,14 +36,14 @@ class DataCoder (DataProcessor):
 
     # Initializes a data structure for storing output data for each item
     def _init_output(self, n_items):
-        self._data['answer'] = [None] * n_items
+        self._data['output'] = [None] * n_items
         self._data['explanation'] = [None] * n_items
     
     # Takes <response> and stores it as part of the output data for item <i>
     def _store_output(self, i, response):
         output = json.loads(response['choices'][0]['message']['content'])
-        self._data['answer'][i] = (np.array(output['answer'].lower().rstrip('.')) == 'yes').astype(dtype=int).tolist()
+        self._data['output'][i] = (np.array(output['answer'].lower().rstrip('.')) == 'yes').astype(dtype=int).tolist()
         self._data['explanation'][i] = output['explanation']
 
-    def _get_output(self):
-        return (self._data['answer'], self._data['explanation'])
+    def explanations(self):
+        return self._data['explanation']

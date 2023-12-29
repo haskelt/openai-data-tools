@@ -1,5 +1,5 @@
 import numpy as np
-from scorer import Scorer
+from .scorer import Scorer
 
 class ClassificationScorer (Scorer):
 

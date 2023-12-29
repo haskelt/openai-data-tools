@@ -2,6 +2,7 @@
 import statistics
 import time
 import random
+import pickle
 # non-standard packages, i.e., you might need to install them
 import numpy as np
 from . import openai_functions as ai
