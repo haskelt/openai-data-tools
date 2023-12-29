@@ -4,7 +4,7 @@ class MultiScorer:
 
     # Creates a MultiScorer object for comparing <outputs> from multiple runs of the model with <targets>. <outputs> should be a list where each item is
     # the output from an individual run.
-    def __init__(self, outputs, targets, method='mean'):
+    def __init__(self, outputs, targets, method='mode'):
         # calculate the average output for each item as the mean of the outputs for each individual run
         if method == 'mean':
             self.avg_outputs = np.mean(np.array(outputs, dtype=int), axis=0)
