@@ -1,21 +1,36 @@
-name1,name2,target
-Alice Walker,Alice Walker,1
-Charles Dickens,John Grisham,0
-Jennifer Chen,Jenny Chen,1
-Darcy Reed,Greta Reed,0
-George Washington,"Washington, George",1
-Jimi Hendrix,James Hendrix,1
-"Benedict, Alfonso","DeNiro, Alfonso",0
-James Garcia,Jimmy Garcia,1
-Harry Potter,"Malfoy, Draco",0
-"Sheeran, Edward","Puth, Charlie",0
-Peggy Fleming,Margaret Fleming,1
-Kris Garner,"Garner, Kristine",1
-"Romanov, Anastasia","Romanov, Alexei",0
-Han Duck-soo,Narendra Modi,0
-Shinzo Abe,"ABE, SHINZO",1
-Harry S. Truman,Harry Truman,1
-Natalie G. Sorensen,Natalie L. Sorensen,0
-John F. Kennedy,John Fitzgerald Kennedy,1
-Edward J Olmos,Edward J. Olmos,1
-"Ghali, Bobby","Ghali, Billy",0
+name1,name2,target,order,nickname,case,middle,partial,suffix,multiword,hyphen
+Alice Walker,Alice Walker,1,,,,,,,,
+Charles Dickens,John Grisham,0,,,,,,,,
+Jennifer Chen,Jenny Chen,1,,1,,,,,,
+Darcy Reed,Greta Reed,0,,,,,1,,,
+George Washington,"Washington, George",1,1,,,,,,,
+Jimi Hendrix,James Hendrix,1,,1,,,,,,
+"Benedict, Alfonso","DeNiro, Alfonso",0,,,,,1,,,
+James Garcia,Jimmy Garcia,1,,1,,,,,,
+Harry Potter,"Malfoy, Draco",0,1,,,,,,,
+"Sheeran, Edward","Puth, Charlie",0,,,,,,,,
+Peggy Fleming,Margaret Fleming,1,,1,,,,,,
+Kris Garner,"Garner, Kristine",1,1,1,,,,,,
+"Romanov, Anastasia","Romanov, Alexei",0,,,,,1,,,
+Han Duck-soo,Narendra Modi,0,,,,,,,,
+Shinzo Abe,"ABE, SHINZO",1,1,,1,,,,,
+Harry S. Truman,Harry Truman,1,,,,1,,,,
+Natalie G. Sorensen,Natalie L. Sorensen,0,,,,1,,,,
+John F. Kennedy,John Fitzgerald Kennedy,1,,,,1,,,,
+Edward J Olmos,Edward J. Olmos,1,,,,1,,,,
+"Ghali, Bobby","Ghali, Billy",0,,,,,1,,,
+BOBBY ORR,"Orr, Robert",1,1,1,1,,,,,
+Madison J. Richter,"Reinholtz, Maddy",0,1,1,,1,1,,,
+"Kingston, Thomas Miller",Tom Kingston,1,1,1,,1,,,,
+Winston Percival Sr.,Winston Percival Jr.,0,,,,,,1,,
+Linus van Pelt,"van Pelt, Linus",1,1,,,,,,1,
+Jackie Rose-Garcia,Jackie RoseGarcia,1,,,,,,,,1
+Julio San Marcos,"San Marcos, Julio",1,1,,,,,,1,
+Ludwig von Beethoven,"von Neumann, John",0,1,,,,1,,1,
+"Acker-Johnson, Barbara",Barbara T. Johnson,0,1,,,1,1,,1,1
+MICHAEL TOMASELLO,"Tomlinson, Mike",0,1,1,1,,1,,,
+L. Scott Grosjean,Scott Grosjean,1,,,,1,,,,
+"Gunderson, Brianna",Bri Henderson,0,1,1,,,1,,,
+"North-Palin, Julia",Julie North-Palin,1,1,1,,,,,,1
+"Smith, Kara","Smithe, Cara",0,,,,,1,,,
+LAURA TRENT,LAURIE V. TRENT,1,,1,,1,,,,
