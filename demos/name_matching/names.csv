@@ -1,5 +1,5 @@
 name1,name2,target,order,nickname,case,middle,partial,suffix,multiword,hyphen
-Alice Wilkins,Alice Wilkins,1,,,,,,,,
+Alice Wilkins,Alice Williams,0,,,,,1,,,
 Charles Dillard,John Graham,0,,,,,,,,
 Jennifer Chen,Jenny Chen,1,,1,,,,,,
 Darcy Reed,Greta Reed,0,,,,,1,,,
@@ -43,3 +43,9 @@ Francis Bond,FRANCIS BOND,1,,,1,,,,,
 Brent Cummingham,"HERTZ, JILL",0,1,1,1,,,,,
 Niles Reed Heath,Patty Reed Horn,0,,,,1,1,,,
 "Tess-Davies, Elena","Dutton-Wells, Elena",0,,,,,1,,,1
+"Bergon, Karen E.","Bergon, Karen M.",0,,,,1,1,,,
+"RASHAD, CHARLES",Charlie Rashad,1,1,1,1,,,,,
+Nate Larrabee,"Larrabee, Nathan Grant",1,1,1,,1,,,,
+CASSANDRA ALVAREZ,CASSIE M. ALVAREZ,1,,1,,1,,,,
+Naomi Sakuma,"Sakura, Nancy",0,1,,,,1,,,
+Bjorn Johansson,Bjorn Johansen,0,,,,,1,,,
