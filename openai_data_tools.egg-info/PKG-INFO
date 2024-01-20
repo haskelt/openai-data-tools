@@ -1,3 +1,21 @@
+Metadata-Version: 2.1
+Name: openai-data-tools
+Version: 0.19.0a0
+Summary: A set of classes for processing data using the OpenAI API
+Home-page: https://github.com/haskelt/openai-data-tools
+Author: Todd Haskell
+Author-email: todd@craggypeak.com
+License: GNU General Public License v3
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 This package provides a set of classes for processing data using calls to OpenAI models.
 
 ## DataProcessor
@@ -23,3 +41,5 @@ A specialized version of `Scorer` that can be used when the model output is a ye
 ## Chat
 
 A class that simulates an interactive chat with a model. See the `chat` demo for an example.
+
+
