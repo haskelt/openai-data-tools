@@ -1,12 +1,11 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: openai-data-tools
-Version: 0.19.1a0
+Version: 0.21.0a0
 Summary: A set of classes for processing data using the OpenAI API
 Home-page: https://github.com/haskelt/openai-data-tools
 Author: Todd Haskell
 Author-email: todd@craggypeak.com
 License: GNU General Public License v3
-Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
 Classifier: Operating System :: OS Independent
@@ -15,6 +14,19 @@ Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
 License-File: LICENSE
+Requires-Dist: openai>=1.1.1
+Requires-Dist: numpy>=1.26.1
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
 
 This package provides a set of classes for processing data using calls to OpenAI models.
 
@@ -41,5 +53,3 @@ A specialized version of `Scorer` that can be used when the model output is a ye
 ## Chat
 
 A class that simulates an interactive chat with a model. See the `chat` demo for an example.
-
-
