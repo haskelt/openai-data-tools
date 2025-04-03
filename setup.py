@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="openai-data-tools",
-    version="0.19.1-alpha",
+    version="0.20.0-alpha",
     author="Todd Haskell",
     author_email="todd@craggypeak.com",
     description="A set of classes for processing data using the OpenAI API",
