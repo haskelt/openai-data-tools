@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
-Name: openai-data-tools
-Version: 0.21.0a0
+Name: openai_data_tools
+Version: 0.22.0a0
 Summary: A set of classes for processing data using the OpenAI API
 Home-page: https://github.com/haskelt/openai-data-tools
 Author: Todd Haskell

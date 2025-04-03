@@ -2,17 +2,20 @@ import json
 import openai
 
 class OpenAI:
+    model = None
     client = None
 
     # Configure properties that will apply to all OpenAI requests
     @classmethod
-    def configure(cls, api_key, model, timeout=30):
-        openai.api_key = api_key
-        # <timeout> controls how long we wait (in seconds) for a  response from OpenAI
-        # before giving up and trying again.
-        openai.timeout = timeout
+    def configure(cls, api_key, model, azure_endpoint=None, api_version=None, timeout=30):
         cls.model = model
-        cls.client = openai.OpenAI()
+        if azure_endpoint:
+            if api_version:
+                cls.client = openai.AzureOpenAI(api_key=api_key, timeout=timeout, azure_endpoint=azure_endpoint, api_version=api_version)
+            else:
+                raise Exception('An api_version argument is required when using an Azure endpoint')
+        else:
+            cls.client = openai.OpenAI(api_key=api_key, timeout=timeout)
     
     # Send a request to the specified <model> containing <messages>, and return the
     # response. If there is a timeout error or a communication error, will keep
