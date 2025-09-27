@@ -65,7 +65,7 @@ class DataProcessor:
         for i, item in enumerate(items):
             response = self._process_item(item)
             self._store_output(i, response)
-            if self._verbose: print('Progress: {:.0%}'.format((i+1)/n_items), end='\r')
+            if self._verbose: print('Progress: {:.0%} ({}/{} items)'.format((i+1)/n_items, i+1, n_items), end='\r')
         if self._verbose: print('')
     
     # Asks the model to go through each item in the list <items>, apply the processing
